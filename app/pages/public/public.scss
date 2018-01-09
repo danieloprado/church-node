@@ -1,0 +1,26 @@
+.pages-public {
+  background: $primary;
+  height: 100%;
+  width: 100%;
+  z-index: 66;
+  color: $white;
+  .logo {
+    text-align: center;
+    img {
+      max-width: 120px;
+      max-height: 120px;
+    }
+  }
+  .title {
+    text-align: center;
+    font-weight: normal;
+    margin-top: 5px;
+    text-shadow: 1px 3px 0 rgba(0, 0, 0, .2);
+  }
+  .content {
+    padding: 30px 10px;
+    @include media-min-breakpoints(sm) {
+      padding: 30px;
+    }
+  }
+}

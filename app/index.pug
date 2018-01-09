@@ -1,0 +1,44 @@
+doctype
+html(lang='en', ng-app='app')
+  head
+    meta(name='viewport', content='initial-scale=1')
+    meta(charset='UTF-8')
+    title ICB
+
+    link(rel='stylesheet', href='/css/libs.min.css?_=@NOW')
+    link(rel='stylesheet', href='/css/app.css?_=@NOW')
+
+    style.
+      .ng-cloak{ display: none }
+
+  body.ng-cloak(layout='column')
+    app-loader-component
+    app-component-page
+
+    div(layout="row", flex)
+      md-sidenav.md-sidenav-left.md-whiteframe-4dp(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
+
+        header
+          app-select-church-component
+          app-user-menu-component
+
+        app-nav-menu-component
+        div.version(test-error) {{'@NOW' | date:'d MMMM y HH:mm'}}
+
+      #main(layout='column', flex, ng-class="{ 'main-tabs-header': headerTabs.tabs.length > 0 }")
+        div
+          md-toolbar.main-toolbar(layout='row')
+            .md-toolbar-tools
+              md-button.md-icon-button(hide-gt-sm='', toggle-sidenav)
+                md-icon(md-svg-icon="menu", size=24)
+
+              h1(app-output-title)
+
+          output-header-tabs
+
+        md-content.scroll-y(layout-padding,md-scroll-y, app-scroll-top)
+          ng-view.main-content
+
+    script(src='/js/libs.min.js?_=@NOW')
+    script(src='/js/all.min.js?_=@NOW')
+    script(src='/js/templates.min.js?_=@NOW')

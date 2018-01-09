@@ -1,0 +1,29 @@
+section
+
+    div.version {{'@NOW' | date:'d MMMM y HH:mm'}}
+    .content
+      .logo
+        img(src="/imgs/logo.png")
+
+      md-tabs.no-header(md-dynamic-height, md-border-bottom, md-selected="$ctrl.currentTab")
+        md-tab(label="Entrar")
+          include ./login-form.pug
+
+        md-tab(label="Recuperar Acesso")
+          include ./recovery-access.pug
+
+        md-tab(label="Recuperar Acesso")
+          md-card
+            md-card-content
+              p Foi enviado um link para seu email para podermos recuperar seu acesso.
+
+          div
+            md-button.md-raised(ng-click="$ctrl.currentTab = 0") Voltar
+
+        md-tab(label="Error")
+          md-card
+            md-card-content
+              p {{$ctrl.errorMessage}}
+
+          div
+            md-button.md-raised(ng-click="$ctrl.currentTab = 0") Voltar

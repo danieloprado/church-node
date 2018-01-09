@@ -1,0 +1,37 @@
+div
+  md-list.p-none(flex='')
+    md-list-item.md-3-line(ng-repeat="user in filtered = ($ctrl.users | filter:$ctrl.query.search | orderBy:$ctrl.query.order | pagination:$ctrl.pagination)", ng-click="$ctrl.details(user, $event)")
+      img.md-avatar(ng-src='{{::user.avatar}}', ng-if="user.avatar")
+      md-icon.md-avatar-icon(md-svg-icon="account", ng-if="!user.avatar")
+
+      div.md-list-item-text(layout='column')
+        h3 {{user.fullName}}
+        h4 {{user.roles | roles}}
+        p Último acesso: {{::user.lastAppDateAccess ? (user.lastAppDateAccess | date:'dd/MM/yyyy HH:mm') : 'Não registrado'}}
+
+      md-menu(md-position-mode="target-right target", app-show-roles="peopleManager")
+        md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+          md-icon(md-svg-icon='dots-vertical')
+        md-menu-content
+          md-menu-item(ng-show="user.isMember")
+            md-button(ng-click='$ctrl.form(user, $event)')
+              md-icon(md-svg-icon='pencil')
+              | Editar
+          md-menu-item(ng-show="!user.isMember")
+            md-button(ng-click='$ctrl.becomeMember(user, $event)')
+              md-icon(md-svg-icon='account-check')
+              | Tornar membro
+          md-menu-item
+            md-button(ng-click='$ctrl.delete(user, $event)')
+              md-icon(md-svg-icon='delete')
+              | Excluir
+
+      md-divider(ng-if="!$last")
+
+    div.no-record.m-t-md.m-b-md(ng-show="!$ctrl.users.length",align="center")
+      | Nenhum usuário criado
+
+    div.no-record.m-t-md.m-b-md(ng-show="$ctrl.users.length && !filtered.length",align="center")
+      | Nenhum usuário encontrado
+
+  app-pagination(model="$ctrl.pagination")

@@ -1,0 +1,12 @@
+div
+    img(src="/imgs/logo.png")
+    p(ng-if="!$ctrl.churches.length")
+      | {{$ctrl.user.church.name}}
+    md-menu(md-position-mode="target target", ng-if="$ctrl.churches.length")
+      md-button(ng-click='$mdOpenMenu($event)')
+        | {{$ctrl.user.church.name}}
+      md-menu-content.select-church-component-menu(width="4")
+        md-menu-item(ng-repeat="church in $ctrl.churches | orderBy:'name'")
+          md-button(ng-click="$ctrl.changeChurch(church)")
+            span {{::church.name}}
+            md-icon(md-svg-icon='check', ng-show="::$ctrl.user.church.id === church.id")

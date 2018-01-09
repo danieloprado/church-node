@@ -1,0 +1,16 @@
+node_modules
+bower_components
+typings
+bin
+*.log
+dist
+publish
+mochawesome-reports
+output-emails
+coverage
+.data
+npm-debug*
+git-publish
+upload/**
+v8-compile-cache*
+.DS_Store

@@ -1,0 +1,29 @@
+md-card
+  md-card-title Agenda nos próximos 7 dias
+
+  md-card-content(ng-if="$ctrl.loading")
+    md-progress-circular.md-accent.m-auto(md-diameter="40", md-mode="indeterminate")
+
+  div(ng-if="!$ctrl.loading")
+    md-card-content(ng-show="!$ctrl.dateGroups.length")
+      div.no-record(align="center")
+        | Nenhum evento próximo
+
+    div(ng-repeat="dates in $ctrl.dateGroups", ng-if="!$ctrl.loading")
+      div.event-list(ng-repeat="date in dates", layout="row",  layout-align="center center", ng-click="$ctrl.details(date.event, $event)")
+        div.date-month(flex="nogrow")
+          span(ng-show="$first")
+            | {{::date.beginDate | date:'dd'}}
+            small.text-capitalize
+              | {{::date.beginDate | date:'MMMM'}}
+              br
+              | {{::date.beginDate | date:'EEE'}}
+        div.details(flex)
+          p
+            | {{::date.event.title}}
+            small
+              | às {{::date.beginDate | date:"HH:mm"}}
+              span(ng-if="date.endDate")
+                | - {{::date.endDate | date:"HH:mm"}}
+
+      md-divider(ng-show="!$last")

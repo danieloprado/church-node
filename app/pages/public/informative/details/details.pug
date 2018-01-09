@@ -1,0 +1,19 @@
+div.content-page-component.animated.fadeInUp.pages-public.pages-public-informative-details
+
+  .content
+    .logo
+      img(src="/imgs/logo.png")
+
+    div(ng-if="!$ctrl.loading && !$ctrl.informative")
+      h2.title O informativo não pode ser encontrado
+
+    div(ng-if="!$ctrl.loading && $ctrl.informative")
+      h2.title
+        | {{::$ctrl.informative.title}}
+        br
+        small.text-capitalize {{::($ctrl.informative.date | date:'EEEE, dd/MMM/yy \'às\'  HH:mm').replace('-feira', '')}}
+
+      md-card.content-informative
+        md-card-content(ng-bind-html="::$ctrl.informative.message")
+
+    app-download-app

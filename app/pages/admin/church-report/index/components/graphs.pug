@@ -1,0 +1,4 @@
+md-card-content
+  app-church-report-index-graphs-line(reports="$ctrl.reports", ng-if="$ctrl.reports.length")
+  div.no-record(ng-show="!$ctrl.reports.length", align="center")
+    | Nenhum relatório encontrado

@@ -1,0 +1,58 @@
+app-login-component {
+  section {
+    background: $primary;
+    height: 100%;
+    width: 100%;
+  }
+  .logo {
+    margin-bottom: 20px;
+    text-align: center;
+    height: 100px;
+    img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  }
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 300px;
+    height: 500px;
+    max-width: calc(100% - 30px);
+  }
+  .social-call {
+    position: relative;
+    color: $white;
+    text-align: center;
+    &:before {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: $white;
+    }
+    span {
+      z-index: 1;
+      background: $primary;
+      padding: 5px 15px;
+      position: relative;
+    }
+  }
+  .version {
+    color: $white;
+    font-size: 11px;
+    text-align: right;
+    padding: 10px;
+    opacity: 0.8;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

@@ -1,0 +1,42 @@
+.user-form-page {
+  .avatar-header {
+    width: 100%;
+    md-icon,
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      vertical-align: top;
+      margin-top: 2px;
+      display: inline-block;
+      background: $avatar-background;
+      margin-left: -5px;
+    }
+    md-icon {
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    >div {
+      display: inline-block;
+      width: calc(100% - 40px);
+      padding-left: 10px;
+      vertical-align: top;
+      margin-top: 2px;
+      box-sizing: border-box;
+      h3 {
+        font-size: 14px;
+      }
+      h2,
+      h3 {
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+      }
+    }
+    &.no-email h2 {
+      margin-top: 7px;
+    }
+  }
+}

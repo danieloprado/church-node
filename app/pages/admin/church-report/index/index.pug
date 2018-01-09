@@ -1,0 +1,47 @@
+app-title Relatórios de Culto
+
+md-button.md-fab.md-fab-bottom-right(ng-click="$ctrl.form(null, $event)")
+  md-icon(md-svg-icon="plus",size=32)
+
+md-card
+  form(md-form-validator, ng-submit="$ctrl.search()")
+    md-card-content.p-b-none(layout="row", layout-wrap="")
+      div(flex="100", flex-gt-xs="50", flex-gt-md="25")
+        md-input-container.md-block.m-b-none
+          label Buscar
+          md-icon(md-svg-icon="magnify")
+          input(ng-model='$ctrl.query.term', name='term')
+          md-messages
+
+      div(flex="100", flex-gt-xs="50", flex-gt-md="25")
+        md-input-container.md-block.m-b-none
+          label Tipos
+          md-select(ng-model='$ctrl.query.typeIds', name="typeIds", multiple, required)
+            md-option(ng-repeat="type in $ctrl.types", ng-value='type.id')
+              | {{::type.name}}
+          md-messages
+
+      div(flex="100", flex-gt-xs="50", flex-gt-md="25")
+        md-input-container.md-block.m-b-none
+          label Período
+          input(ng-model='$ctrl.query.beginDate', name='beginDate', required, datepicker)
+          md-messages
+
+      div(flex="100", flex-gt-xs="50", flex-gt-md="25")
+        md-input-container.md-block.m-b-none
+          label Fim
+          input(ng-model='$ctrl.query.endDate', name='endDate', required, datepicker)
+          md-messages
+
+    md-card-actions(layout="row", layout-align="end center")
+      md-button.md-accent(type="submit")
+        md-icon(md-svg-icon="magnify")
+        | Pesquisar
+
+md-card.m-t-md
+  md-tabs(md-dynamic-height, md-border-bottom)
+    md-tab(label="Gráficos")
+      app-church-report-index-graphs-component(reports="$ctrl.reports")
+
+    md-tab(label="Lista")
+      app-church-report-index-list-component(reports="$ctrl.reports")

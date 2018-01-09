@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "rootDir": "server",
+    "outDir": "bin",
+    "noUnusedLocals": true
+  },
+  "include": [
+    "server/**/*.ts"
+  ],
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules",
+    "bower_components"
+  ]
+}

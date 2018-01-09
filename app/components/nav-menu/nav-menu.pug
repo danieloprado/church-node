@@ -1,0 +1,22 @@
+nav.menu
+  md-button(ng-href="/", toggle-sidenav)
+    md-icon(md-svg-icon="chart-areaspline", size=24)
+    span Dashboard
+  md-button(ng-href="/pessoas", toggle-sidenav)
+    md-icon(md-svg-icon="account-multiple", size=24)
+    span Pessoas
+  md-button(ng-href="/agenda", toggle-sidenav)
+    md-icon(md-svg-icon="calendar", size=24)
+    span Agenda
+  md-button(ng-href="/informativos", toggle-sidenav)
+    md-icon(md-svg-icon="newspaper", size=24)
+    span Informativos
+  md-button(ng-href="/relatorios-culto", toggle-sidenav, app-show-roles="churchReport")
+    md-icon(md-svg-icon="counter", size=24)
+    span Relatórios de Culto
+  md-button(ng-href="/visitantes", toggle-sidenav, app-show-roles="churchReport")
+    md-icon(md-svg-icon="account-switch", size=24)
+    span Visitantes
+  md-button(ng-href="/igreja", toggle-sidenav, app-show-roles="admin")
+    md-icon(md-svg-icon="church", size=24)
+    span Igreja

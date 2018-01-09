@@ -1,0 +1,70 @@
+md-dialog.user-form-page(flex="95", flex-md="70", flex-lg="50")
+  form(md-form-validator='', ng-submit="$ctrl.submit()", name="$ctrl.form")
+    md-toolbar(flex="none")
+      div.md-toolbar-tools
+        h2(ng-if="!$ctrl.model.id") Adicionar Membro
+        div.avatar-header(ng-if="$ctrl.model.id", ng-class="{ 'no-email': !$ctrl.model.email }")
+          img(ng-src='{{::$ctrl.model.avatar}}', ng-if="$ctrl.model.avatar")
+          md-icon(md-svg-icon="account", ng-if="!$ctrl.model.avatar")
+
+          div
+            h2 {{::$ctrl.model.fullName}}
+            h3 {{::$ctrl.model.email}}
+
+        span(flex='')
+        md-button.md-icon-button(ng-click='$ctrl.cancel()')
+          md-icon(md-svg-icon="close")
+
+    md-dialog-content
+      md-tabs(md-dynamic-height='')
+        md-tab(label="Informações")
+          div.md-dialog-content
+            div(layout="column",layout-gt-xs="row")
+              div(flex)
+                md-input-container.md-block
+                  label Nome
+                  input(ng-model="$ctrl.model.firstName", name="firstName", required, md-maxlength="50")
+                  md-messages(field="firstName")
+
+              div(flex)
+                md-input-container.md-block
+                  label Sobrenome
+                  input(ng-model="$ctrl.model.lastName", name="lastName", required, md-maxlength="150")
+                  md-messages(field="lastName")
+
+            div(layout="column",layout-gt-xs="row")
+              div(flex)
+                md-input-container.md-block
+                  label Email
+                  input(ng-model="$ctrl.model.email", name="email", type='email')
+                  md-messages(field="email")
+
+            div(layout="column",layout-gt-xs="row")
+              div(flex)
+                md-input-container.md-block
+                  label Sexo
+                  md-select(ng-model="$ctrl.model.gender", name="gender")
+                    md-option(value="") Não informado
+                    md-option(value="m") Masculino
+                    md-option(value="f") Feminino
+                  md-messages(field="gender")
+              div(flex)
+                md-input-container.md-block
+                  label Aniversário
+                  input(ng-model="$ctrl.model.birthday", name="birthday", datepicker, max='today', type='text')
+                  md-messages(field="birthday")
+
+        md-tab(label="Acesso")
+          div.md-dialog-content(layout="column",layout-gt-xs="row",layout-wrap)
+            div(flex="50", flex-lg="30", ng-repeat="role in $ctrl.roles")
+              md-checkbox(ng-model="role.selected")
+                strong {{role.name}}
+                br
+                | {{role.description}}
+
+    md-dialog-actions(layout='row')
+      md-button.md-raised(ng-click="$ctrl.cancel()")
+        | Cancelar
+      span(flex='')
+      md-button.md-primary.md-raised(type="submit")
+        | Salvar

@@ -1,0 +1,7 @@
+{
+  "extends": "../.eslintrc.json",
+  "globals": {
+    "angular": true,
+    "google": true
+  }
+}

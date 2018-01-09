@@ -1,0 +1,48 @@
+md-list.p-none(flex='')
+  div.list-item(ng-repeat="report in $ctrl.reports | pagination:$ctrl.pagination")
+    div(layout="row", layout-wrap="", layout-align="center center")
+      div(flex="100", flex-gt-sm="40")
+        md-list-item.md-3-line
+          div.md-list-item-text(layout='column')
+            h3 {{::report.title}}
+            h4 {{::report.date | date:'EEEE, dd \'de\' MMMM, y'}}
+            p {{::report.type.name}}
+
+      div(flex="100", flex-gt-sm="60")
+        div.counters(layout="row", layout-wrap="", layout-align="center center")
+          div.text-center(flex="20")
+            | {{::report.totalMembers}}
+            small Memb.
+          div.text-center(flex="20")
+            | {{::report.totalNewVisitors}}
+            small Visit.
+          div.text-center(flex="20")
+            | {{::report.totalFrequentVisitors}}
+            small Freq.
+          div.text-center(flex="20")
+            | {{::report.totalKids}}
+            small Crian.
+          div.text-center(flex="20")
+            | {{::report.total}}
+            small Total
+
+    md-menu(md-position-mode="target-right target")
+      md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+        md-icon(md-svg-icon='dots-vertical')
+      md-menu-content
+        md-menu-item
+          md-button(ng-click='$ctrl.form(report, $event)')
+            md-icon(md-svg-icon='pencil')
+            | Editar
+        md-menu-item
+          md-button(ng-click='$ctrl.delete(report, $event)')
+            md-icon(md-svg-icon='delete')
+            | Excluir
+
+    md-divider(ng-show="!$last")
+
+
+  div.no-record.m-t-md.m-b-md(ng-show="!$ctrl.reports.length", align="center")
+    | Nenhum relatório encontrado
+
+app-pagination(model="$ctrl.pagination")

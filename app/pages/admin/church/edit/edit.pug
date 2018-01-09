@@ -1,0 +1,41 @@
+app-title Igreja
+
+form(md-form-validator, ng-submit="$ctrl.submit()")
+  md-card
+    md-card-content
+
+      md-input-container.md-block
+        label Name
+        input(ng-model='$ctrl.model.name', name="name", required)
+        md-messages
+          md-message(required) Obrigatório
+
+      div(layout="row",layout-sm="column",layout-xs="column")
+        div(flex)
+          md-input-container.md-block
+            label Email
+            input(ng-model='$ctrl.model.email', type="email", name="email")
+            md-messages
+              md-message(email) Email inválido
+              md-message(required) Obrigatório
+
+        div(flex)
+          md-input-container.md-block
+            label Telefone
+            input(ng-model='$ctrl.model.phone', name="phone", ui-br-phone-number)
+            md-messages
+              md-message(required) Obrigatório
+
+      div(layout="row",layout-sm="column",layout-xs="column", layout-wrap="")
+        div(flex="100", flex-md="50", flex-lg="30", ng-repeat="social in $ctrl.model.social")
+          ng-form(name="socialForm", md-form-validator)
+            md-input-container.md-block.md-icon-float
+              label {{::social.display}}
+              md-icon(md-svg-icon="{{::social.icon}}", size=24)
+              input(ng-model='social.url', type="url", name="url")
+              md-messages(field='url')
+
+      app-place-maps(ng-model="$ctrl.location",placeholder="Endereço")
+
+  div(align="right")
+    md-button.md-raised.md-accent(type="submit") Salvar

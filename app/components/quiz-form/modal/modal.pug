@@ -1,0 +1,79 @@
+md-dialog.user-form-page(flex="95", flex-md="70", flex-lg="50")
+  form(md-form-validator='', ng-submit="$ctrl.submit()", name="$ctrl.form")
+    md-toolbar(flex="none")
+      div.md-toolbar-tools
+        h2 {{::$ctrl.modal.id ? 'Editar': 'Adicionar'}} Pergunta
+        span(flex='')
+        md-button.md-icon-button(ng-click='$ctrl.cancel()')
+          md-icon(md-svg-icon="close")
+
+    md-dialog-content
+      div.md-dialog-content
+        div(layout="row", layout-wrap="")
+
+          div(flex="100", flex-gt-sm="60")
+            md-input-container.md-block
+              label Título
+              input(ng-model="$ctrl.model.title", name="title", required, ng-minlength="3", md-maxlength="250")
+              md-messages
+
+          div(flex="100", flex-gt-sm="40")
+            md-input-container.md-block
+              label Tipo
+              md-select(ng-model="$ctrl.model.type", name="type", required)
+                md-option(ng-repeat="t in $ctrl.types", ng-value="t.value")
+                  | {{::t.display}}
+              md-messages
+
+          div(flex="100")
+            md-input-container.md-block
+              label Descrição
+              textarea(ng-model="$ctrl.model.description", name="description", md-maxlength="1000")
+              md-messages
+
+        md-checkbox(ng-model="$ctrl.model.required")
+          | Resposta Obrigatória
+
+        div(ng-if="$ctrl.hasOptions")
+          p.md-title(ng-show="$ctrl.model.type != 'list'") Opções
+          p.md-title(ng-show="$ctrl.model.type == 'list'") Perguntas
+
+          p.text-center.text-danger(ng-show="!$ctrl.model.options.length")
+            | Nenhuma opção adicionada
+
+          div(ng-repeat="option in $ctrl.model.options")
+
+            div(layout="column", layout-gt-xs="row", layout-wrap="", ng-form, md-form-validator)
+              div(flex)
+                md-input-container.md-block
+                  label Título
+                  input(ng-model="option.title", name="title", required, ng-minlength="3", md-maxlength="250")
+                  md-messages
+
+              div(flex)
+                md-input-container.md-block
+                  label Descrição
+                  textarea(ng-model="option.description", name="description", md-maxlength="1000")
+                  md-messages
+
+              div(flex, ng-show="$ctrl.model.type === 'list'")
+                md-input-container.md-block
+                  label Tipo
+                  md-select(ng-model="option.type", name="type", ng-required="$ctrl.model.type === 'list'")
+                    md-option(ng-repeat="t in $ctrl.typesForList", ng-value="t.value")
+                      | {{::t.display}}
+                  md-messages
+
+              div.text-right(flex="none")
+                md-button.md-icon-button-text.m-input
+                  md-icon(md-svg-icon="delete", ng-click="$ctrl.removeOption($index)")
+                  span.hide-gt-xs Apagar
+
+    md-dialog-actions(layout='row')
+      md-button(ng-click="$ctrl.cancel()")
+        | Cancelar
+      span(flex='')
+      md-button.md-primary(type="button", ng-click="$ctrl.addOption()", ng-show="$ctrl.hasOptions")
+        | Adicionar opção
+      md-button.md-primary.md-raised(type="submit")
+        | Salvar

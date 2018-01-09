@@ -1,0 +1,23 @@
+md-dialog.member-details-page(flex="95", flex-md="70", flex-lg="50")
+  md-toolbar(flex="none")
+    .md-toolbar-tools
+      h2 Evento
+      span(flex='')
+      md-button.md-icon-button(ng-click='$ctrl.close()')
+        md-icon(md-svg-icon="close")
+
+  md-dialog-content
+    .md-dialog-content
+      h2.md-title.m-t-none {{::$ctrl.model.title}}
+      div.md-subhead(ng-repeat="date in $ctrl.model.dates")
+        span.text-capitalize {{::date.beginDate | date:'EEE'}}, &nbsp;
+        span.text-capitalize {{::date.beginDate | date:'d MMMM y'}}
+        | &nbsp;às {{::date.beginDate | date:'HH:mm'}}
+        span(ng-show="date.endDate") &nbsp;- {{::date.endDate | date:'HH:mm'}}
+
+      p.pre.md-body {{$ctrl.model.description}}
+      p.no-record(ng-show="!$ctrl.model.description") Sem descrição
+
+  md-dialog-actions(layout='row')
+    md-button.md-raised(ng-click="$ctrl.close()")
+      | Ok

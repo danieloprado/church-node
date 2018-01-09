@@ -1,0 +1,81 @@
+app-title
+  span(ng-show="!$ctrl.editing") Novo Evento
+  span(ng-show="$ctrl.editing") Editar Evento
+
+form(md-form-validator, ng-submit="$ctrl.submit()", name="eventForm")
+  md-card
+    md-card-content.p-b-none
+
+      div(layout="row", layout-xs="column")
+        div(flex)
+          md-input-container.md-block
+            label Título
+            input(ng-model='$ctrl.model.title', name='title', required, ng-minlength="3", md-maxlength="100")
+            md-messages
+
+          md-input-container.md-block.m-b-none
+            label Descrição
+            textarea(ng-model='$ctrl.model.description', name='description', md-maxlength="1000")
+            md-messages
+
+        div(flex="5")
+          br
+
+        div(flex="none")
+          app-image-upload-component(ng-model="$ctrl.model.image", label="Imagem", size="200x200")
+
+      md-input-container.md-block.m-b-none
+        md-checkbox(ng-model="$ctrl.model.featured")
+          strong Destacar evento
+          br
+          small
+            | Ele aparecerá na tela inicial do aplicativo e na listagem terá uma cor diferente.
+            | Apenas um evento aparecerá, a prioridade será o mais próximo
+
+      md-input-container.md-block(ng-if="$ctrl.model.featured")
+        label Descrição breve / chamada
+        textarea(ng-model='$ctrl.model.featuredText', name='featuredText', ng-required="$ctrl.model.featured", minlength="3", md-maxlength="200")
+        md-messages
+
+    md-divider
+    md-subheader Datas
+
+    md-card-content.p-t-none
+
+      div(ng-repeat="date in $ctrl.model.dates")
+        div(layout="row", layout-xs="column", ng-form="dateForm", md-form-validator)
+          div(flex)
+            md-input-container.md-block.m-b-none
+              label Inicio
+              input(ng-model='date.beginDate', name='beginDate', required, datepicker)
+              md-messages
+
+          div(flex)
+            md-input-container.md-block.m-b-none
+              label Hora
+              input(ng-model='date.beginTime', name="beginTime", timepicker, required)
+              md-messages
+
+          div(flex)
+            md-input-container.md-block.m-b-none
+              label Término
+              input(ng-model='date.endTime', name="endTime", timepicker)
+              md-messages
+
+          div(flex="nogrow", ng-if="$ctrl.model.dates.length > 1")
+            md-button.md-icon-button.m-input(ng-click="$ctrl.removeDate($index)")
+              md-icon(md-svg-icon="delete")
+
+      div.text-right
+        md-button.md-accent(ng-click="$ctrl.addDate()") Adicionar Data
+
+    md-divider
+    md-subheader Formulário
+
+    app-quiz-form-component(ng-model="$ctrl.model.quiz")
+
+  div(layout="row")
+    div(flex)
+      md-button.md-raised(ng-href="/agenda") Cancelar
+    div.text-right(flex)
+      md-button.md-raised.md-accent(type="submit") Salvar

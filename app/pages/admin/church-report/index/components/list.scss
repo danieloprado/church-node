@@ -1,0 +1,45 @@
+app-church-report-index-list-component {
+  .list-item {
+    position: relative;
+    @include media-min-breakpoints(md) {
+      >div {
+        padding-right: 40px;
+      }
+    }
+
+    .counters {
+      padding: 10px 10px 25px 10px;
+      font-weight: bold;
+
+      @include media-min-breakpoints(md) {
+        padding: 10px;
+      }
+
+      div {
+        opacity: 0.6;
+
+        &:last-child {
+          opacity: 1;
+          font-size: 120%;
+        }
+
+        small {
+          display: block;
+        }
+      }
+    }
+
+    md-menu {
+      position: absolute;
+      top: 15px;
+      right: 0;
+
+      @include media-min-breakpoints(md) {
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 40px;
+      }
+    }
+  }
+}

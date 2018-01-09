@@ -1,0 +1,9 @@
+md-card.card-indicator
+  md-card-content
+    md-icon(md-svg-icon="account-multiple", size=24)
+
+    div(ng-if="$ctrl.loading")
+      md-progress-circular(md-diameter="20", md-mode="indeterminate")
+
+    p.number(ng-if="!$ctrl.loading") {{::$ctrl.total}}
+    p.description Membros

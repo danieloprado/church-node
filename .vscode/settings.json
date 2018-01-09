@@ -1,0 +1,19 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "files.exclude": {
+    "bin/**": true,
+    "**/bin/**": false,
+    "publish/**": true,
+    "dist/**": true,
+    "node_modules/**": true,
+    "bower_components/**": true,
+    "db/**": true,
+    "mochawesome-reports/**": true,
+    "output-emails/**": true,
+    ".data/**": true,
+    "upload/**": true,
+    "v8-compile-cache*": true
+  },
+  "vsicons.presets.angular": false,
+  "javascript.implicitProjectConfig.checkJs": false
+}

@@ -1,0 +1,37 @@
+div
+  md-table-container
+
+    table(md-table)
+      thead(md-head)
+        tr(md-row)
+          th(md-column) Titulo
+          th(hide, show-gt-xs, md-column) Tipo
+          th.text-center(hide, show-gt-xs, md-column) Obrigatório
+          th(md-column)
+
+      tbody(md-body)
+        tr(md-row, ng-repeat="question in $ctrl.ngModel.questions")
+          td(md-cell) {{question.title}}
+          td(md-cell) {{question.type | quizQuestionType}}
+          td.text-center(md-cell)
+            md-icon(ng-show="question.required", md-svg-icon="check")
+          td.md-cell-buttons(md-cell)
+            md-menu(md-position-mode="target-right target")
+              md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+                md-icon(md-svg-icon='dots-vertical')
+              md-menu-content
+                md-menu-item
+                  md-button(ng-click="$ctrl.form(question, $event)")
+                    md-icon(md-svg-icon='pencil')
+                    | Editar
+                md-menu-item
+                  md-button(ng-click="$ctrl.removeQuestion(question, $event)")
+                    md-icon(md-svg-icon='delete')
+                    | Excluir
+
+    div.no-record(ng-show="!$ctrl.ngModel.questions.length", align="center")
+      | Nenhuma pergunta adicionada
+
+  div(layout="column",layout-gt-xs="row")
+    div(flex)
+    md-button.md-accent(ng-click="$ctrl.form(null, $event)") Adicionar Pergunta

@@ -1,0 +1,46 @@
+version: '2'
+services:
+
+  web:
+    container_name: church-api
+    tty: true
+    build: docker/dev
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=3001
+      - DB_HOST=database
+      - DB_PORT=5432
+      - FIREBASE_KEY=XXX
+      - SENTRY_KEY=XXX
+      - MAILGUN_FROM=XXX
+      - MAILGUN_APIKEY=XXX
+      - MAILGUN_DOMAIN=XXX
+      - DATABASE_HOST=database
+      - DATABASE_DB=church
+      - DATABASE_USER=docker
+      - DATABASE_PASSWORD=1234
+      - DATABASE_PORT=5432
+      - FACEBOOK_APP_ID=123
+      - FACEBOOK_APP_SECRET=123
+      - GOOGLE_API_KEY=123
+      - GOOGLE_CLIENT_ID=123
+      - GOOGLE_CLIENT_SECRET=123
+    ports:
+      - "3001:3001"
+      - "5859:5859"
+    volumes:
+      - .:/src
+    links:
+      - database
+
+  database:
+    container_name: church-database
+    image: postgres:9.5-alpine
+    environment:
+      - POSTGRES_DB=church
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - ./.data/postgresql:/var/lib/postgresql/data
+    ports:
+      - "3002:5432"

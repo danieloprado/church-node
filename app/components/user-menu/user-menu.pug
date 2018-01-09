@@ -1,0 +1,15 @@
+div
+  p {{$ctrl.user.firstName}}
+
+  md-menu(md-position-mode="target-right target")
+    md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+      md-icon(md-svg-icon='dots-vertical')
+    md-menu-content
+      md-menu-item
+        md-button(ng-click="$ctrl.changePassword($event)")
+          md-icon(md-svg-icon="key-variant")
+          | Trocar senha
+      md-menu-item
+        md-button(ng-click='$ctrl.logout()')
+          md-icon(md-svg-icon='logout')
+          | Sair

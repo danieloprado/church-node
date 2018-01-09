@@ -1,0 +1,50 @@
+.member-details-page {
+  .avatar-block {
+    text-align: center;
+    @include media-min-breakpoints(sm) {
+      max-width: 150px;
+    }
+    img.md-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+    md-icon.md-avatar-icon {
+      width: 150px;
+      height: 150px;
+      background-color: rgba(0, 0, 0, 0.38);
+      color: #fafafa;
+      display: block;
+      border-radius: 50%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+  .content-block {
+    vertical-align: top;
+    box-sizing: border-box;
+    padding-top: 20px;
+    @include media-min-breakpoints(sm) {
+      padding-left: 40px;
+      padding-top: 0;
+    }
+    h2 {
+      text-align: center;
+      @include media-min-breakpoints(sm) {
+        text-align: left;
+      }
+    }
+    md-list {
+      margin-left: -16px;
+      md-list-item,
+      md-list-item>.md-button {
+        height: 35px;
+        min-height: 0;
+        md-icon:first-child:not(.md-avatar-icon) {
+          margin-right: 15px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

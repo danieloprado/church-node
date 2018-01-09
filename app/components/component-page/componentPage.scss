@@ -1,0 +1,12 @@
+.content-page-component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $white;
+  z-index: 67;
+  overflow: auto;
+  animation-duration: 0.5s;
+  transition: all 0.3s ease-in-out 0s;
+}

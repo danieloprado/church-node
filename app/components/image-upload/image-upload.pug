@@ -1,0 +1,12 @@
+div
+  md-card.card-image(style="background-image: url({{$ctrl.getFileUrl()}})")
+
+    md-card-title {{::$ctrl.label}}
+
+    md-card-actions(layout="row" layout-align="end center")
+      md-button.md-icon-button(upload-file="$ctrl.upload($value)" extensions=".jpg,.jpeg,.png,.gif")
+        md-icon(md-svg-icon="upload" size="24")
+      md-button.md-icon-button(ng-if="$ctrl.hasFile()" ng-click="$ctrl.removeUpload()")
+        md-icon(md-svg-icon="delete" size="24")
+
+  p.md-caption.text-center(ng-show="$ctrl.size") Tamanho sugerido: {{::$ctrl.size}}

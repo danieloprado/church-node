@@ -1,0 +1,30 @@
+app-select-church-component {
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .md-menu>.md-button {
+    width: calc(100% - 25px);
+    text-align: center;
+  }
+}
+
+.select-church-component-menu {
+  max-width: calc(100vw - 20px);
+  .md-button {
+    span {
+      display: inline-block;
+      width: calc(100% - 30px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 6px;
+    }
+    md-icon {
+      float: right;
+      margin: 12px 0 0 0;
+    }
+  }
+}

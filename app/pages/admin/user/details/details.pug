@@ -1,0 +1,61 @@
+md-dialog.member-details-page(flex="95", flex-md="70", flex-lg="50")
+  md-toolbar(flex="none")
+    .md-toolbar-tools
+      h2 Membro
+      span(flex='')
+      md-button.md-icon-button(ng-click='$ctrl.close()')
+        md-icon(md-svg-icon="close")
+
+  md-dialog-content
+    .md-dialog-content(layout="column",layout-gt-xs="row")
+      div.avatar-block(flex)
+        img.md-avatar(ng-src='{{::$ctrl.model.avatar}}', ng-if="::$ctrl.model.avatar")
+        md-icon.md-avatar-icon(md-svg-icon="account", ng-if="::!$ctrl.model.avatar")
+
+      div.content-block(flex)
+        h2.m-b-none.m-t-none {{::$ctrl.model.fullName}}
+
+        md-list.md-dense
+          md-list-item
+            md-icon(md-svg-icon="key")
+            p
+              span(ng-if="::$ctrl.model.roles.length") {{::$ctrl.model.roles | roles}}
+              span(ng-if="::!$ctrl.model.roles.length") Não possui acesso
+
+          md-list-item
+            md-icon(md-svg-icon="email")
+            p
+              span(ng-if="::$ctrl.model.email") {{::$ctrl.model.email}}
+              span(ng-if="::!$ctrl.model.email") Não informado
+
+          md-list-item
+            md-icon(md-svg-icon="{{::$ctrl.model.gender === 'f' ? 'gender-female': 'gender-male'}}")
+            p
+              span(ng-if="::$ctrl.model.gender") {{::$ctrl.model.gender === 'f' ? 'Feminino': 'Masculino'}}
+              span(ng-if="::!$ctrl.model.gender") Não informado
+
+          md-list-item
+            md-icon(md-svg-icon="cake-variant")
+            p
+              span(ng-if="::$ctrl.model.birthday") {{::$ctrl.model.birthday | birthday}}
+              span(ng-if="::!$ctrl.model.birthday") Não informado
+
+          md-list-item
+            md-icon(md-svg-icon="heart")
+            p
+              span(ng-if="::$ctrl.model.married") {{::$ctrl.model.married.fullName}}
+              span(ng-if="::!$ctrl.model.married") Não informado
+
+          div(ng-repeat="social in ::$ctrl.model.socials")
+            md-list-item(ng-if="::social.provider === 'facebook'", href="https://facebook.com/{{::social.ref}}", target="_blank")
+              md-icon(md-svg-icon="facebook-box")
+              p(ng-if-end) Facebook
+
+            md-list-item(ng-if="::social.provider === 'google'", href="https://plus.google.com/{{::social.ref}}", target="_blank")
+              md-icon(md-svg-icon="google-plus-box")
+              p(ng-if-end) Google
+
+
+  md-dialog-actions(layout='row')
+    md-button.md-raised(ng-click="$ctrl.close()")
+      | Ok

@@ -1,0 +1,34 @@
+doctype strict
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width')
+
+    include _theme
+      style(type="text/css").
+        .mui-panel > :first-child {
+          margin-top: 0;
+        }
+
+        .error {
+          color: red;
+        }
+
+        .pre {
+          white-space: pre;
+        }
+  body
+    table.mui-body(cellpadding='0', cellspacing='0', border='0')
+      tr
+        td.mui-panel
+
+          h2 Um erro aconteceu
+
+          p.mui--text-subhead.pre
+            | Date: #{new Date().toLocaleString('pt-BR')}
+            br
+            | User: #{JSON.stringify(user || {}, null, 4)}
+            br
+            | Request: #{JSON.stringify(req || {}, null, 4)}
+
+          p.mui--text-subhead.error.pre !{error.stack}

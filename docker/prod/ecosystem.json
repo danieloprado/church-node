@@ -1,0 +1,8 @@
+{
+  "apps": [{
+    "name": "church-api",
+    "script": "bin/main.js",
+    "watch": false,
+    "exec_mode": "cluster"
+  }]
+}

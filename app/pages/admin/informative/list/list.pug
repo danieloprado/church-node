@@ -1,0 +1,70 @@
+app-title Informativos
+
+md-button.md-fab.md-fab-bottom-right(href="/informativos/novo", app-show-roles="contentManager")
+  md-icon(md-svg-icon="plus",size=32)
+
+md-card
+  md-card-content(layout-padding)
+
+    div(layout="column",layout-gt-xs="row")
+      div(flex="70")
+        md-input-container.md-block.m-t-none(md-no-float="")
+          md-icon(md-svg-icon="magnify")
+          input(ng-model='$ctrl.query.filter.title', name='title', placeholder="Titulo")
+      div(flex="30")
+        md-input-container.md-block.m-t-none(md-no-float="" )
+          md-select(ng-model='$ctrl.query.filter.typeId', name="typeId",  placeholder="Tipos")
+            md-option(value="") Tipos
+            md-option(ng-repeat="type in $ctrl.types", ng-value='type.id')
+              | {{::type.name}}
+
+  md-table-container
+
+    table(md-table, md-progress="$ctrl.dataPromise",)
+      thead(md-head, md-order="$ctrl.query.order")
+        tr(md-row)
+          th(md-column, md-order-by="title") Titulo
+          th.text-center(hide, show-gt-xs, md-column, md-order-by="typeId") Tipo
+          th.text-center(md-column, md-order-by="date") Dia
+          th(md-column)
+
+      tbody(md-body)
+        tr(md-row, ng-repeat="informative in filtered = ($ctrl.informatives | filter:$ctrl.query.filter | orderBy:$ctrl.query.order | pagination:$ctrl.pagination)")
+          td(md-cell)
+            p.m-none(hide, show-gt-xs) {{::informative.title}}
+            div(hide-gt-xs)
+              strong {{::informative.title}}
+              p.m-none {{::informative.typeId | informativeType}}
+          td.text-center(md-cell, hide, show-gt-xs)
+            md-icon(md-svg-icon="{{::informative.typeId | informativeTypeIcon}}")
+            br
+            | {{::informative.typeId | informativeType}}
+          td.text-capitalize.text-center(md-cell)
+            strong {{::(informative.date | date:'EEEE').replace('-feira', '')}}
+            br
+            | {{::informative.date | date:'dd/MMM/yy \'às\' HH:mm'}}
+          td.md-cell-buttons(md-cell)
+            md-menu(md-position-mode="target-right target")
+              md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+                md-icon(md-svg-icon='dots-vertical')
+              md-menu-content
+                md-menu-item
+                  md-button(href="{{::informative.shareUrl}}", target="_blank")
+                    md-icon(md-svg-icon='share')
+                    | Compartilhar
+                md-menu-item(app-show-roles="contentManager")
+                  md-button(href="/informativos/{{::informative.id}}/editar")
+                    md-icon(md-svg-icon='pencil')
+                    | Editar
+                md-menu-item(app-show-roles="contentManager")
+                  md-button(ng-click="$ctrl.delete($event, informative, $index)")
+                    md-icon(md-svg-icon='delete')
+                    | Excluir
+
+    div.no-record(ng-show="!$ctrl.informatives.length", align="center")
+      | Nenhum informativo criado
+
+    div.no-record(ng-show="$ctrl.informatives.length && !filtered.length", align="center")
+      | Nenhum informativo encontrado
+
+  app-pagination(model="$ctrl.pagination")

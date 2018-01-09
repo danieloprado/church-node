@@ -1,0 +1,30 @@
+form(md-form-validator,ng-submit='$ctrl.login()',name='loginForm', novalidate='')
+  md-card
+    md-card-content
+
+      md-input-container.md-block
+        label Email
+        input(ng-model='$ctrl.model.email', name='email', type='email', required, ng-disabled="$ctrl.lockUser")
+        md-messages
+
+      md-input-container.md-block
+        label Senha
+        input(ng-model='$ctrl.model.password', name='password', type='password', required)
+        md-messages
+
+  div(layout='row')
+    md-button.md-raised(ng-show="!$ctrl.lockUser", ng-click="$ctrl.currentTab = 1") Recuperar acesso
+    md-button.md-raised(type="button", ng-show="$ctrl.lockUser", ng-click="$ctrl.changeUser($event)") Trocar de usuário
+    span(flex='')
+    md-button.md-raised.md-accent(type='submit') Entrar
+
+  p.social-call(ng-show="!$ctrl.lockUser")
+    span Ou use sua rede social:
+
+  div(layout='row', ng-show="!$ctrl.lockUser")
+    md-button.md-raised.with-icon.md-facebook(type='button', flex='', ng-click="$ctrl.loginSocial('facebook')")
+      md-icon(md-svg-icon="facebook")
+      | Facebook
+    md-button.md-raised.with-icon.md-google(type='button', flex='', ng-click="$ctrl.loginSocial('google')")
+      md-icon(md-svg-icon="google")
+      | Google

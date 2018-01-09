@@ -1,0 +1,42 @@
+.pages-public-informative-details {
+  margin-left: 0;
+  margin-right: 0;
+
+  .content-informative {
+    h1 {
+      margin-top: 4rem;
+      margin-bottom: 1rem;
+      font-size: 24px;
+      color: #86bd90;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      font-size: 20px;
+    }
+
+    h1+h2 {
+      margin-top: 0;
+    }
+
+    .content>h1:first-child,
+    .content>h2:first-child {
+      margin-top: 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 18px;
+    }
+
+    ul li,
+    ol li {
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

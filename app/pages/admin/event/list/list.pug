@@ -1,0 +1,58 @@
+app-title Agenda
+
+md-button.md-fab.md-fab-bottom-right(href="/agenda/criar", app-show-roles="contentManager")
+  md-icon(md-svg-icon="plus",size=32)
+
+md-card.event-list-page
+  md-card-content(layout-padding)
+
+    form(md-form-validator, name="$ctrl.queryForm", layout="column",layout-gt-xs="row")
+      div(flex)
+        md-input-container.md-block.m-b-none
+          label Período
+          input(ng-model='$ctrl.query.beginDate', name='beginDate', required, datepicker)
+          md-messages
+      div(flex)
+        md-input-container.md-block.m-b-none
+          label Fim
+          input(ng-model='$ctrl.query.endDate', name='endDate', required, datepicker)
+          md-messages
+
+    div(ng-show="$ctrl.loading")
+      md-progress-circular.md-accent.m-auto(md-diameter="40", md-mode="indeterminate")
+
+    div.no-record(ng-show="!$ctrl.monthGroups.length && !$ctrl.loading", align="center")
+      | Nenhum evento criado
+
+  div(ng-repeat="monthGroup in $ctrl.monthGroups")
+    md-card-content
+      p.md-subhead.text-capitalize {{monthGroup[0][0].beginDate | date:'MMMM'}}
+
+    div(ng-repeat="dates in monthGroup", ng-if="!$ctrl.loading")
+      div.event-list(ng-repeat="date in dates", layout="row",  layout-align="center center", ng-click="$ctrl.details(date.event, $event)")
+        div.date(flex="nogrow")
+          span(ng-show="$first")
+            | {{::date.beginDate | date:'dd'}}
+            small.text-capitalize {{::date.beginDate | date:'EEE'}}
+        div.details(flex)
+          p
+            | {{::date.event.title}}
+            small
+              | às {{::date.beginDate | date:"HH:mm"}}
+              span(ng-if="date.endDate")
+                | - {{::date.endDate | date:"HH:mm"}}
+        div(flex="none")
+          md-menu(md-position-mode="target-right target", app-show-roles="admin")
+            md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+              md-icon(md-svg-icon='dots-vertical')
+            md-menu-content
+              md-menu-item
+                md-button(ng-href="/agenda/{{date.event.id}}/editar")
+                  md-icon(md-svg-icon="pencil")
+                  | Editar
+              md-menu-item
+                md-button(ng-click="$ctrl.delete($event, date.event)")
+                  md-icon(md-svg-icon="delete")
+                  | Apagar
+
+    md-divider
